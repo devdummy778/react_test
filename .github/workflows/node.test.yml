@@ -17,3 +17,14 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
+
+  publish:
+    needs: buildtest
+    runs-on: ubuntu-latest
+    steps:
+       -  uses: actions/checkout@v2
+       -  uses: akhileshns/heroku-deploy@v3.5.6
+          with:
+            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+            heroku_app_name: "deploy-test-awesome-2"
+            heroku_email: "dev.teach.user.dummy@gmail.com""
